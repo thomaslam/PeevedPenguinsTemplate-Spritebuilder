@@ -12,7 +12,6 @@
     CCPhysicsNode* _physicsNode;
     CCNode* _catapultArm;
     CCNode* _levelNode;
-    CCButton* _retryButton;
     CCNode* _contentNode;
 }
 
