@@ -5,7 +5,7 @@
 //  Created by Thomas Lam on 6/25/14.
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
-
+#import "CCPhysics+ObjectiveChipmunk.h"
 #import "Gameplay.h"
 
 @implementation Gameplay {
@@ -124,9 +124,29 @@
     [[CCDirector sharedDirector] replaceScene: [CCBReader loadAsScene:@"Gameplay"]];
 }
 
--(void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair seal:(CCNode *)nodeA wildcard:(CCNode *)nodeB
-{
-    CCLOG(@"Something collided with a seal!");
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair seal:(CCNode *)nodeA wildcard:(CCNode *)nodeB {
+    float energy = [pair totalKineticEnergy];
+    
+    // if energy is large enough, remove the seal
+    if (energy > 5000.f) {
+        [[_physicsNode space] addPostStepBlock:^{
+            [self sealRemoved:nodeA];
+        } key:nodeA];
+    }
+}
+
+- (void)sealRemoved:(CCNode *)seal {
+    // load particle effect
+    CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"SealExplosion"];
+    // make the particle effect clean itself up, once it is completed
+    explosion.autoRemoveOnFinish = TRUE;
+    // place the particle effect on the seals position
+    explosion.position = seal.position;
+    // add the particle effect to the same node the seal is on
+    [seal.parent addChild:explosion];
+    
+    // finally, remove the destroyed seal
+    [seal removeFromParent];
 }
 
 @end
