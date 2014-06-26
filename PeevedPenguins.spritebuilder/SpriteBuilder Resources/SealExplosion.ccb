@@ -110,8 +110,8 @@
 				<string>Point</string>
 				<key>value</key>
 				<array>
-					<real>400</real>
-					<real>40</real>
+					<real>20</real>
+					<real>20</real>
 				</array>
 			</dict>
 			<dict>
@@ -167,8 +167,8 @@
 				<string>FloatVar</string>
 				<key>value</key>
 				<array>
-					<real>250</real>
-					<real>10</real>
+					<real>0.0</real>
+					<real>0.0</real>
 				</array>
 			</dict>
 			<dict>
@@ -179,7 +179,7 @@
 				<key>value</key>
 				<array>
 					<real>0.0</real>
-					<real>90</real>
+					<real>0.0</real>
 				</array>
 			</dict>
 			<dict>
@@ -200,7 +200,7 @@
 				<string>FloatVar</string>
 				<key>value</key>
 				<array>
-					<real>240</real>
+					<real>90</real>
 					<real>0.0</real>
 				</array>
 			</dict>
