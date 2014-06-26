@@ -76,6 +76,7 @@ static const float MIN_SPEED = 5.f;
 - (void)releaseCatapult {
     if (_mouseJoint != nil)
     {
+        _currentPenguin.launched = TRUE;
         // releases the joint and lets the catapult snap back
         [_mouseJoint invalidate];
         _mouseJoint = nil;
@@ -105,7 +106,6 @@ static const float MIN_SPEED = 5.f;
 }
 
 - (void)launchPenguin {
-    _currentPenguin.launched = TRUE;
     // loads the Penguin.ccb we have set up in Spritebuilder
     CCNode* penguin = [CCBReader load:@"Penguin"];
     // position the penguin at the bowl of the catapult
