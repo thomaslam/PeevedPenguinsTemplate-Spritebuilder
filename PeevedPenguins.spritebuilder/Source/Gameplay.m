@@ -105,6 +105,7 @@ static const float MIN_SPEED = 5.f;
 }
 
 - (void)launchPenguin {
+    _currentPenguin.launched = TRUE;
     // loads the Penguin.ccb we have set up in Spritebuilder
     CCNode* penguin = [CCBReader load:@"Penguin"];
     // position the penguin at the bowl of the catapult
@@ -157,27 +158,25 @@ static const float MIN_SPEED = 5.f;
 - (void)update:(CCTime)delta
 {
     if (_currentPenguin.launched) {
+        // if speed is below minimum speed, assume this attempt is over
+        if (ccpLength(_currentPenguin.physicsBody.velocity) < MIN_SPEED){
+            [self nextAttempt];
+            return;
+        }
     
+        int xMin = _currentPenguin.boundingBox.origin.x;
+        
+        if (xMin < self.boundingBox.origin.x) {
+            [self nextAttempt];
+            return;
+        }
     
-    // if speed is below minimum speed, assume this attempt is over
-    if (ccpLength(_currentPenguin.physicsBody.velocity) < MIN_SPEED){
-        [self nextAttempt];
-        return;
-    }
+        int xMax = xMin + _currentPenguin.boundingBox.size.width;
     
-    int xMin = _currentPenguin.boundingBox.origin.x;
-    
-    if (xMin < self.boundingBox.origin.x) {
-        [self nextAttempt];
-        return;
-    }
-    
-    int xMax = xMin + _currentPenguin.boundingBox.size.width;
-    
-    if (xMax > (self.boundingBox.origin.x + self.boundingBox.size.width)) {
-        [self nextAttempt];
-        return;
-    }
+        if (xMax > (self.boundingBox.origin.x + self.boundingBox.size.width)) {
+            [self nextAttempt];
+            return;
+        }
     }
 }
 
