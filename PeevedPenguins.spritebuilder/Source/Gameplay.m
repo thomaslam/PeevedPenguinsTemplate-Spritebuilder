@@ -174,7 +174,6 @@ static const float MIN_SPEED = 5.f;
     
         if (xMax > (self.boundingBox.origin.x + self.boundingBox.size.width)) {
             [self nextAttempt];
-            CCLOG(@"debug");
             return;
         }
     }
