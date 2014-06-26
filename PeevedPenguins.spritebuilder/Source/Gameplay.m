@@ -141,7 +141,6 @@ static const float MIN_SPEED = 5.f;
 }
 
 - (void)sealRemoved:(CCNode *)seal {
-    NSLog(@"debug");
     // load particle effect
     CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"SealExplosion"];
     // make the particle effect clean itself up, once it is completed
@@ -157,6 +156,7 @@ static const float MIN_SPEED = 5.f;
 
 - (void)update:(CCTime)delta
 {
+    CCLOG(@"debug");
     if (_currentPenguin.launched) {
         // if speed is below minimum speed, assume this attempt is over
         if (ccpLength(_currentPenguin.physicsBody.velocity) < MIN_SPEED){
